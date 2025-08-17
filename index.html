@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Recipe Card</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hud-controls" id="hud-controls">
+        <div class="hud-left">
+            <div class="recipe-progress">
+                <div class="progress-info">
+                    <span class="progress-text" id="progress-text">Ready to cook</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hud-center">
+            <div class="cooking-controls">
+                <button class="control-btn primary" id="start-cooking-btn">
+                    <span class="btn-icon">🍳</span>
+                    <span>Start Cooking</span>
+                </button>
+                <button class="control-btn secondary" id="next-step-btn" style="display: none;">
+                    <span class="btn-icon">→</span>
+                    <span>Next Step</span>
+                </button>
+                <button class="control-btn tertiary" id="reset-btn" style="display: none;">
+                    <span class="btn-icon">↻</span>
+                    <span>Reset</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="hud-right">
+            <div class="timer-section">
+                <div class="timer-display">
+                    <span class="timer-label">Timer</span>
+                    <span class="timer-value" id="timer-value">00:00</span>
+                </div>
+                <button class="timer-toggle" id="timer-toggle">Start</button>
+            </div>
+            <button class="print-btn" id="print-btn" title="Print Recipe">🖨️</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="recipe-header">
+            <div class="header-content">
+                <div class="recipe-image">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Decadent Chocolate Cake">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="recipe-info">
+                    <h1 class="recipe-title">Decadent Chocolate Cake</h1>
+                    <div class="recipe-meta">
+                        <div class="meta-card">
+                            <span class="meta-value">30m</span>
+                            <span class="meta-label">Prep</span>
+                        </div>
+                        <div class="meta-card">
+                            <span class="meta-value">45m</span>
+                            <span class="meta-label">Cook</span>
+                        </div>
+                        <div class="meta-card">
+                            <span class="meta-value">8</span>
+                            <span class="meta-label">Serves</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="recipe-content">
+            <div class="ingredients-column">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2>Ingredients</h2>
+                        <button class="toggle-btn" id="ingredients-toggle">
+                            <span class="toggle-icon">−</span>
+                        </button>
+                    </div>
+                    <div class="ingredients-grid" id="ingredients-content">
+                        <div class="ingredient-item">
+                            <span class="quantity">2 cups</span>
+                            <span class="name">all-purpose flour</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">2 cups</span>
+                            <span class="name">granulated sugar</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">¾ cup</span>
+                            <span class="name">cocoa powder</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">2 tsp</span>
+                            <span class="name">baking soda</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">1 tsp</span>
+                            <span class="name">baking powder</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">1 tsp</span>
+                            <span class="name">salt</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">2</span>
+                            <span class="name">large eggs</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">1 cup</span>
+                            <span class="name">buttermilk</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">½ cup</span>
+                            <span class="name">vegetable oil</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">2 tsp</span>
+                            <span class="name">vanilla extract</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <span class="quantity">1 cup</span>
+                            <span class="name">hot coffee</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions-column">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2>Instructions</h2>
+                        <div class="step-counter">
+                            <span id="current-step-display">Step 0</span>
+                            <span class="step-total">of 8</span>
+                        </div>
+                    </div>
+                    <div class="instructions-container" id="instructions-content">
+                        <div class="instruction-step" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Prepare the Pans</h3>
+                                <p>Preheat your oven to 350°F (175°C). Grease and flour two 9-inch round baking pans.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Mix Dry Ingredients</h3>
+                                <p>In a large bowl, whisk together flour, sugar, cocoa powder, baking soda, baking powder, and salt.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Prepare Wet Ingredients</h3>
+                                <p>In another bowl, beat eggs, then add buttermilk, oil, and vanilla extract. Mix well.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Combine Ingredients</h3>
+                                <p>Add the wet ingredients to the dry ingredients and mix until just combined.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-step" data-step="5">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Add Coffee</h3>
+                                <p>Gradually stir in the hot coffee until the batter is smooth (it will be thin).</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-step" data-step="6">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h3>Fill Pans</h3>
+                                <p>Divide the batter evenly between the prepared pans.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-step" data-step="7">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <h3>Bake the Cakes</h3>
+                                <p>Bake for 30-35 minutes, or until a toothpick inserted in the center comes out clean.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="instruction-step" data-step="8">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <h3>Cool and Finish</h3>
+                                <p>Cool in pans for 10 minutes, then turn out onto wire racks to cool completely before frosting.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
